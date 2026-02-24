@@ -135,7 +135,7 @@ def mpesa_payment():
             "TransactionDesc": "account"
         }
 
-        # POPULAING THE HTTP HEADER
+        # POPULAING THE HTTP HEADE
         headers = {
             "Authorization": access_token,
             "Content-Type": "application/json"
