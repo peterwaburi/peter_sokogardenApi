@@ -1,8 +1,11 @@
 from flask import *
 import pymysql
 import os
+from flask_cors import CORS
 
 app=Flask(__name__)
+CORS(app)
+
 app.config["UPLOAD_FOLDER"]="static/images"
 
 
@@ -16,7 +19,7 @@ def signup():
 
     print(username, email, phone, password)
     # create db connection
-    connection=pymysql.connect(host="localhost", user="root", password="", database="peter_sokogarden")
+    connection=pymysql.connect(host="mysql-peter511.alwaysdata.net", user="peter511", password="modcom2026", database="peter511_sokogarden")
 
     # create cursor
     cursor=connection.cursor()
@@ -38,7 +41,7 @@ def signin():
     email=request.form["email"]
     password=request.form["password"]
     print(email,password)
-    connection=pymysql.connect(host="localhost", user="root", password="", database="peter_sokogarden")
+    connection=pymysql.connect(host="mysql-peter511.alwaysdata.net", user="peter511", password="modcom2026", database="peter511_sokogarden")
     cursor=connection.cursor(pymysql.cursors.DictCursor)
     sql="select user_id, user_name, email, phone from users where email=%s and password=%s"
     data=(email,password)
@@ -67,7 +70,7 @@ def addproduct():
     file_path=os.path.join(app.config["UPLOAD_FOLDER"], image_name)
     product_image.save(file_path)
 
-    connection=pymysql.connect(host="localhost", user="root", password="", database="peter_kima")
+    connection=pymysql.connect(host="mysql-peter511.alwaysdata.net", user="peter511", password="modcom2026", database="peter511_sokogarden")
     cursor=connection.cursor()
     sql="insert  into products_details (product_name, product_description, product_cartegory, product_cost, product_image) values(%s,%s,%s,%s,%s)"
     data=(product_name,product_description,product_cartegory,product_cost,image_name)
@@ -80,7 +83,7 @@ def addproduct():
 
 @app.route("/api/get_products")
 def getproducts():
-    connection=pymysql.connect(host="localhost", user="root", password="", database="peter_sokogarden")
+    connection=pymysql.connect(host="mysql-peter511.alwaysdata.net", user="peter511", password="modcom2026", database="peter511_sokogarden")
     cursor=connection.cursor(pymysql.cursors.DictCursor)
     sql="select * from products_details"
     cursor.execute(sql)
@@ -147,5 +150,5 @@ def mpesa_payment():
         print(response.text)
         return jsonify({"message": "Please Complete Payment in Your Phone and we will deliver in minutes"})
 
-if __name__=="__main__":
-    app.run(debug=True)
+# if __name__=="__main__":
+#     app.run(debug=True)
