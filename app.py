@@ -138,7 +138,7 @@ def mpesa_payment():
             "TransactionDesc": "account"
         }
 
-        # POPULAING THE HTTP HEADER
+        # POPULAING THE HTTP HEADE
         headers = {
             "Authorization": access_token,
             "Content-Type": "application/json"
@@ -150,5 +150,10 @@ def mpesa_payment():
         print(response.text)
         return jsonify({"message": "Please Complete Payment in Your Phone and we will deliver in minutes"})
 
+<<<<<<< HEAD
 # if __name__=="__main__":
 #     app.run(debug=True)
+=======
+if __name__=="__main__":
+    app.run(debug=True)
+>>>>>>> 86c1e43bb0f06831f82047c732da65b089cc6032
